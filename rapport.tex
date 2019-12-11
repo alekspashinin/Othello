@@ -1,0 +1,275 @@
+\documentclass[11pt,a4paper]{article}
+
+\usepackage{graphicx}
+\graphicspath{ {Images/} }
+\usepackage[top=2cm, bottom=2cm, left=2cm, right=2cm]{geometry}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage[latin1]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[french]{babel}
+\usepackage{ucs}
+
+\usepackage{hyperref}
+\usepackage{fourier}
+\usepackage{listings}
+
+\setcounter{secnumdepth}{4}
+
+\begin{document}
+
+
+\title{\textbf{Projet Othello}}
+
+\author{\large{Soupilas Dimitrios,Pashinin Aleksei}}
+
+\date{13.05.2018}
+
+\maketitle
+\newpage
+
+\section{L'architicture de projet:}
+Pour effectuer notre jeux, nous avons decouper notre programme en certains modules:\\
+\\
+
+\begin{itemize}
+  
+  \item \texttt{game.c/game.h}
+  \item \texttt{coupe.c/coupe.h}
+  \item \texttt{1v1.c/1v1.h}
+  \item \texttt{arbre.c/arbre.h}
+  \item \texttt{level1.c/level1.h}
+  \item \texttt{level2.c/level2.h}
+  \item \texttt{menu.c} - Le module menu dirige tout l'affichage du menu du jeu. Il initialise "intro" de le programme, et aussi il affiche le menu principale, dirige la fonctionalite de tous les boutons dans le jeu. 
+  \item \texttt{main.c/main.h} - Le module principal du programme \verb|main| dirige tous les modules et fait tourner notre programme.
+
+\end{itemize}
+
+\section{menu.c:}
+Le module \verb|menu.c| contient les fonctions d'administration des menus et boutons du programme.
+\subsection{Fonctions}
+\begin{itemize}
+\item \verb|void newgame()| - L'implementation du menu newgame qui se situe au dessous du menu principale. Dans ce menu on peut choisir nombre de joueurs.
+\item \verb|void newgame2()| - L'implementation du menu "1 player" qui se situe au dessous du menu newgame. Dans ce menu on peut choisir le niveau du jeu. 
+\item \verb|void newgame3()| - L'implementation du menu "1 player->Level2" qui se situe au dessous du menu newgame. Dans ce menu on peut choisir la prfondeur du jeu.
+\item \verb|void about()| - L'implementation de la partie de menu about qui se situe au dessous du menu principale. Dans cette partie on peut lire les regles du jeu.
+\item \verb|void button()| - La fonction qui dirige tous les 'clicks'  des boutons par utilisateur. 
+\item \verb|void nav()| - La fonction qui dirige le changement du couleur des boutons de noir au bleau au cause de la position de la courseur de souris.
+\item \verb|void blic_test(int i)| - La fonction pour distinguer les clics de souris et changement des coordonees du courseur.
+\item \verb|void menu_princ()| - L'implementation du menu principale de jeu. 
+ 
+\end{itemize}
+
+\subsection{Les difficultes}
+Dans cette fonction nous avons trouver des difficultes a distinguer les boutons avec les memes coordonees. Nous avons decider d'ajouter un troisieme parametre a notre fonction \verb|button|:
+\begin{itemize}
+\item \texttt{int z} - Le numero de menu.
+\item \texttt{int x1} - Le valeur de X de souris. 
+\item \texttt{int y1} - Le valeur de Y de souris.
+\end{itemize}
+
+Ou z est:
+ \begin{itemize}
+\item \texttt{z=0} - Le menu principale.
+\item \texttt{z=1} - Le menu "newgame". 
+\item \texttt{z=2} - Le menu "1player".
+\item \texttt{z=3} - Le menu "1player"->"Level2". 
+\item \texttt{z=4 ou z=5} - Le menu "settings" et "about"
+\end{itemize}
+
+Apres d'inclusion de ce parametre nous avons resolus ce probleme.
+
+
+
+
+\section{game.c / game.h}
+Le module game rassemble des fonction basiques sur l'implementation du jeu. 
+\subsection{Typedefs}
+\begin{lstlisting}
+  typedef struct {
+    int score;
+    char name[20];
+  }player;
+  
+  typedef struct {
+    int board[8][8];
+    player p1;
+    player p2;
+    int tour;
+    int debutant; 
+  }game;
+  
+  typedef struct {
+    int pos_x;
+    int pos_y;
+  }coup;
+\end{lstlisting}
+
+
+
+La stucture \texttt{player}, est constitue d'un entier qui represente le score, et d'une chaine de character qui supposement contient le nom des joueurs (que l'on a pas utiliser).
+\\
+La structure \texttt{game}, est constitue d'un tableau d'enter 8 * 8 qui represente la partie en cours, deux \texttt{player}, un entier tour qui contient le tour du joueur et un entier debutant qui contient le joueur qui a commencer.
+\\
+La structure \texttt{coup}, est constitue de deux entier qui representent des positions dans le \texttt{board} du \texttt{game}.
+\\
+Il est important de noter que toutes les fonctions sont implementes pour fonctioner sur toutes les definitions d'ecrants.
+
+\subsection{Fonctions}
+
+\begin{itemize}
+  
+\item \texttt{game init\_game();}
+\item \texttt{void affiche\_board(game *g);}
+\item \texttt{void affiche\_possibilite(int tablu[8][8]);}
+\item \texttt{int adverse(game *g);}
+\item \texttt{void calc\_affiche\_score\_MLV(game *g);}
+\item \texttt{void affiche\_score\_fin\_MLV(game *g, MLV\_Image *board, MLV\_Image *white, MLV\_Image *black);}
+\item \texttt{void affichage\_MLV(game *g, MLV\_Image *board, MLV\_Image *white, MLV\_Image *black);}
+\item \texttt{game copy\_game(game* g);}
+\item \texttt{int est\_fini(game *g);}
+  
+\end{itemize}
+
+Vous pouvez retrouver toutes les descriptions sur ce que font et comment elles fonctionnent dans le fichier \texttt{game.h}.
+\\
+On a pas affronter de difficultes particulieres en creant ce module. Mais le calcul des coordones exactes a ete assez particulier affin de le faire fonctionner sur toutes les machines. Voir le fichier \texttt{sizes} pour les detailles.
+\newpage
+\section{coup.c / coup.h}
+
+Le module coup rassemble les fonction sur les coups dans le jeux. Jouer des coups, verifier si un coup est possible, calculer et afficher les coups possibles etc..
+\\
+La deffinition du type \texttt{coup} a ete faite dans le module game.
+
+\subsection{Fonctions}
+
+\begin{itemize}
+  
+\item \texttt{int exist\_dev(coup *cp, game *g);}
+\item \texttt{int exist\_der(coup *cp, game *g);}
+\item \texttt{int exist\_bas(coup *cp, game *g);}
+\item \texttt{int exist\_haut(coup *cp, game *g);}
+\item \texttt{int exist\_dev\_haut(coup *cp,game *g);}
+\item \texttt{int exist\_dev\_bas(coup *cp, game *g);}
+\item \texttt{int exist\_der\_haut(coup *cp, game *g);}
+\item \texttt{int exist\_der\_bas(coup *cp, game *g);}
+\item \texttt{int jouer(coup *cp, game *g);}
+\item \texttt{void possibilite(game *g,int tablu[8][8],int *tablu\_i,int *tablu\_j);}
+\item \texttt{int existe\_affiche\_coup(game *g,MLV\_Image *options);}
+\item \texttt{int existe\_coup(game *g);}
+\item \texttt{coup lire\_coup();}
+
+\end{itemize}
+
+Vous pouvez retrouver toutes les descriptions sur ce que font et comment elles fonctionnent dans le fichier \texttt{coup.h}.
+
+Les difficultes retrouves dans ce modules sont de bien gere les coup joues, bien definir les limites dans le \texttt{board} pour toutes les fonctions \texttt{exist\_X} ainsi que bien gere que lors d'un coup tout les cas soient verifies afin de transformer correctement le \texttt{board}.\\
+De plus dans la fonction \texttt{void possibilite} bien gerer le tableaux dinamiques.
+
+\section{1v1}
+Ce module contient qu'une seul fonction :\\
+\texttt{game mode\_1v1(MLV\_Image *board, MLV\_Image *black, MLV\_Image *white, MLV\_Image *options)}
+Elle implemente le 1v1, aucune difficulte.
+
+\section{level1.c /level1.h}
+Ce module implemente le mode de jeux contre une IA qui choisie a chaque fois le coup qui va lui raporter le plus grand score au prochain coup.
+\subsection{Fonctions}
+\begin{itemize}
+
+\item \texttt{void position\_gagnate(game *g,int *tablu\_i,int *tablu\_j);}
+\item \texttt{void ia\_next\_step\_max(game *g,int taille\_pos);}
+\item \texttt{game mode\_1(MLV\_Image *board, MLV\_Image *black, MLV\_Image *white, MLV\_Image *options);}
+
+\end{itemize}
+
+Vous pouvez retrouver toutes les descriptions sur ce que font et comment elles fonctionnent dans le fichier \texttt{level1.h}.\\
+
+La grande difficulte ete de bien calculer la coup joue pour la position gagnate.
+\newpage
+\section{arbre.c / arbre.h}
+Ce module implemente l'utilisation d'arbres, ansi que la creation d'arbre recursif et l'evaluation du plateau.
+\subsection{Typedefs}
+
+\begin{lstlisting}
+  typedef struct noeud{
+    game g;
+    coup cp;
+    int nb_fils;
+    struct noeud **fils;
+}noeud;
+
+typedef struct {
+    int nb_choises;
+    int *best;
+}bestplay;
+\end{lstlisting}
+
+\subsection{Fonctions}
+
+\begin{itemize}
+
+\item \texttt{arbre arbre\_vide();}
+\item \texttt{bestplay init\_bp(game *g);}
+\item \texttt{int evaluation\_plateu ( game * g);}
+\item \texttt{int est\_vide(arbre a);}
+\item \texttt{arbre creer\_arbre(game *g,coup *cp);}
+\item \texttt{arbre inserer\_fils\_n(arbre a, arbre fils, int num\_fils);}
+\item \texttt{arbre creer\_arbre\_avec\_prof3(game *g, coup *cp, int prof\_act, int prof\_lim, bestplay *bp, int *count);}
+\item \texttt{void free\_arbre(arbre a);}
+
+\end{itemize}
+
+Vous pouvez retrouver toutes les descriptions sur ce que font et comment elles fonctionnent dans le fichier \texttt{arbre.h}.\\
+
+La diificulte ultime creer un arbre recursivement avec n\_fils gerer toutes les allocations, les creations etc.. cette fonction nous a manger deux jourss car nous avions (en plus de quelques erreurs d'allocation) definis dans la structure texttt{noeud} les \texttt{game} comme de pointeurs \texttt{(game *g)} ce qui nous sabotage le retour.
+
+\section{level2.c level2.h}
+
+Ce module implemente le mode de jeux contre une ia qui cree un arbre de profondeur 2.
+\subsection{Fonction}
+
+
+\begin{itemize}
+
+\item \texttt{void ia\_2(game *g);}
+\item \texttt{game mode\_2(MLV\_Image *board, MLV\_Image *black, MLV\_Image *white, MLV\_Image *options);}
+
+\end{itemize}
+
+Apres la creation de l'arbre il n'y a aucune difficulte.
+\newpage
+\section{leve3.c level2.h}
+Ce Ce module implemente le mode de jeux contre une ia qui cree un arbre de profondeur N.
+Identique que level2.
+
+\begin{itemize}
+
+\item \texttt{void ia\_3(game *g,int p);}
+\item \texttt{game mode\_3(MLV\_Image *board, MLV\_Image *black, MLV\_Image *white, MLV\_Image *options,int prof);}
+
+\end{itemize}
+
+\section{Repartition du travail}
+\begin{itemize}
+\item PASHININ Aleksei :
+  \begin{itemize}
+  \item Menu
+  \end{itemize}
+\item SOUPILAS Dimitrios :
+  \begin{itemize}
+  \item Implementation du jeux
+  \item 1v1
+  \end{itemize}
+\item Ensemble :
+  \begin{itemize}
+  \item Arbres
+  \item IAs
+  \end{itemize}
+\end{itemize}
+
+
+
+
+  
+\end{document}\grid
+\grid

@@ -1,0 +1,51 @@
+x:
+
+size between 0 and start of board 423
+between 0  and end of board 855  1.49707
+x size = 855 - 423 = 432
+size of each block = 432/8 = 54
+
+
+the x of the board is in 3.0260047281 of the whole pic (problem float not int)
+
+y:
+
+size between 0 and start of board 185
+between 0 and end of board 615
+y size = 615 - 185 = 430
+size of each block 53.75 = 54
+
+the y of the board is in 4.23 of the whole pic (again problem not int)
+
+
+score:
+black:
+for top rectangle:
+x position 90
+1280/90=14.222222222
+y position 185
+800/185=4.3243243243
+
+for middle rectangle:
+x position 150
+8.5333333
+y position 240
+3.3333333
+
+
+white:
+for top rectangle:
+x position 1040
+1280/1040=1.2307692308
+y position
+800/185=4.3243243243
+
+for middle rectangle:
+x position 1100
+1.16363636
+y_position
+3.3333333
+
+
+
+
