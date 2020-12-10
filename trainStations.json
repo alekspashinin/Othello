@@ -1,0 +1,11 @@
+{
+  "type": "FeatureCollection",
+  "features": [
+    {"type":"Feature","properties":{"name":"trainsStation1"},"geometry":{"type":"Point","coordinates":[4.399665431171106,45.44324846017733]},"id":"bk020frm4jca"},
+    {"type":"Feature","properties":{"name":"trainsStation2"},"geometry":{"type":"Point","coordinates":[4.384977743712798,45.446826741995]},"id":"bk020frm4jcz"},
+    {"type":"Feature","properties":{"name":"trainsStation3"},"geometry":{"type":"Point","coordinates":[4.37939261598195,45.46496764422361]},"id":"bk020frm4jce"},
+    {"type":"Feature","properties":{"name":"trainsStation4"},"geometry":{"type":"Point","coordinates":[4.3781803492792415,45.43737318682159]},"id":"bk020frm4jcr"},
+    {"type":"Feature","properties":{"name":"trainsStation5"},"geometry":{"type":"Point","coordinates":[4.39237774750157,45.417443336887416]},"id":"bk020frm4jct"},
+    {"type":"Feature","properties":{"name":"trainsStation6"},"geometry":{"type":"Point","coordinates":[4.361017443589664,45.40436450540731]},"id":"bk020frm4jcy"}
+  ]
+}
