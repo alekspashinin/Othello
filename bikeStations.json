@@ -1,0 +1,14 @@
+{
+  "type": "FeatureCollection",
+  "features": [
+    {"type":"Feature","properties":{"name":"bikeStation1"},"geometry":{"type":"Point","coordinates":[4.398838957452448,45.44320100172268]},"id":"xk020frm4jca"},
+    {"type":"Feature","properties":{"name":"bikeStation2"},"geometry":{"type":"Point","coordinates":[4.3976795563509175,45.4402500475409]},"id":"xk020frm4jcs"},
+    {"type":"Feature","properties":{"name":"bikeStation3"},"geometry":{"type":"Point","coordinates":[4.37896817370343,45.437600313477674]},"id":"xk020frm4jcd"},
+    {"type":"Feature","properties":{"name":"bikeStation4"},"geometry":{"type":"Point","coordinates":[4.382873095938078,45.44196686690747]},"id":"xk020frm4jcf"},
+    {"type":"Feature","properties":{"name":"bikeStation5"},"geometry":{"type":"Point","coordinates":[4.389825326340122,45.431126325597845]},"id":"xk020frm4jcg"},
+    {"type":"Feature","properties":{"name":"bikeStation6"},"geometry":{"type":"Point","coordinates":[4.404292709767967,45.42779868244353]},"id":"xk020frm4jch"},
+    {"type":"Feature","properties":{"name":"bikeStation7"},"geometry":{"type":"Point","coordinates":[4.3831480444262425,45.45393210574899]},"id":"xk020frm4jcj"},
+    {"type":"Feature","properties":{"name":"bikeStation8"},"geometry":{"type":"Point","coordinates":[4.392077616720399,45.43556154550198]},"id":"xk020frm4jck"},
+    {"type":"Feature","properties":{"name":"bikeStation9"},"geometry":{"type":"Point","coordinates":[4.388258417139373,45.43881346836307]},"id":"xk020frm4jcl"}
+  ]
+}
